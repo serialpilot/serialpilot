@@ -1,0 +1,78 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const link = (p: string) => `${base}${p.replace(/^\//, '')}`;
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  {/* Signal strip — mirrors the topbar scroll-progress: same 3-colour gradient */}
+  <div class="foot__signal" aria-hidden="true"></div>
+
+  <div class="wrap foot__grid">
+    {/* Column 1 — Brand + tagline */}
+    <section class="foot__col foot__col--brand">
+      <a class="brand" href={link('/')} aria-label="SerialPilot home">
+        <span class="brand__mark" aria-hidden="true">
+          <img src={link('/assets/serialpilot-logo.png')} alt="" width="22" height="22" />
+        </span>
+        <span class="brand__name">SerialPilot</span>
+      </a>
+      <p class="foot__tagline">
+        A composable serial-port toolkit for Node.js.
+        Open a port, pipe its stream through a parser, ship.
+      </p>
+      <p class="foot__author">
+        Built &amp; maintained by <a href="mailto:contact@riteshrana.engineer">Ritesh Rana</a> ·
+        © {year} · MIT
+      </p>
+    </section>
+
+    {/* Column 2 — Resources */}
+    <section class="foot__col">
+      <p class="foot__head">Resources</p>
+      <ul class="foot__list">
+        <li><a href={link('/docs')}>Documentation</a></li>
+        <li><a href={link('/docs/getting-started')}>Getting started</a></li>
+        <li><a href={link('/docs/api')}>API reference</a></li>
+        <li><a href={link('/docs/parsers')}>Parsers</a></li>
+        <li><a href={link('/docs/cli')}>CLI tools</a></li>
+      </ul>
+    </section>
+
+    {/* Column 3 — Project */}
+    <section class="foot__col">
+      <p class="foot__head">Project</p>
+      <ul class="foot__list">
+        <li><a href="https://github.com/riteshrana/serialpilot" rel="noopener">GitHub<span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://www.npmjs.com/package/serialpilot" rel="noopener">npm registry<span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://github.com/riteshrana/serialpilot/blob/main/CHANGELOG.md" rel="noopener">Changelog<span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://github.com/riteshrana/serialpilot/blob/main/LICENSE" rel="noopener">MIT License<span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://github.com/riteshrana/serialpilot/issues" rel="noopener">Issue tracker<span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </section>
+
+    {/* Column 4 — Status / metadata + coffee callout */}
+    <section class="foot__col foot__col--status">
+      <p class="foot__head">Status</p>
+      <dl class="foot__meta">
+        <div><dt>Version</dt><dd>v1.0.0</dd></div>
+        <div><dt>Node</dt><dd>≥&nbsp;20</dd></div>
+        <div><dt>Prebuilds</dt><dd>linux · darwin · win32</dd></div>
+        <div><dt>Bundle</dt><dd>esm · cjs · types</dd></div>
+      </dl>
+
+      <a class="foot__coffee" href="https://buymeacoffee.com/ritesh.rana" rel="noopener">
+        <span class="foot__coffee-mark" aria-hidden="true">☕</span>
+        <span class="foot__coffee-body">
+          <span class="foot__coffee-head">Saved you a weekend?</span>
+          <span class="foot__coffee-cta">Buy me a coffee<span aria-hidden="true">↗</span></span>
+        </span>
+      </a>
+    </section>
+  </div>
+
+  {/* Tail strip — closing transmission marker */}
+  <div class="wrap foot__tail" aria-hidden="true">
+    <span class="foot__tail-sig">end of transmission ━━━ 0x04</span>
+  </div>
+</footer>

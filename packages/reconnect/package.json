@@ -1,0 +1,56 @@
+{
+  "name": "@serialpilot/reconnect",
+  "version": "1.0.0",
+  "description": "Auto-reconnect wrapper for SerialPilot",
+  "license": "MIT",
+  "author": "Ritesh Rana <contact@riteshrana.engineer>",
+  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/reconnect",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "directory": "packages/reconnect"
+  },
+  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "serialpilot",
+    "reconnect",
+    "retry",
+    "resilience",
+    "auto-reconnect",
+    "wrapper",
+    "serial"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc --build tsconfig-build.json"
+  },
+  "dependencies": {
+    "@serialpilot/bindings-interface": "1.0.0",
+    "@serialpilot/stream": "1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

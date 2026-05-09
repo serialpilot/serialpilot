@@ -1,0 +1,175 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Topbar from '~/components/Topbar.astro';
+import Footer from '~/components/Footer.astro';
+import DocsHeader from '~/components/DocsHeader.astro';
+import { getCollection } from 'astro:content';
+import '~/styles/prose.css';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const link = (p: string) => `${base}${p.replace(/^\//, '')}`;
+
+const all = await getCollection('docs');
+const groups = {
+  start:     all.filter((e) => e.data.group === 'start').sort((a, b) => a.data.order - b.data.order),
+  reference: all.filter((e) => e.data.group === 'reference').sort((a, b) => a.data.order - b.data.order),
+  recipes:   all.filter((e) => e.data.group === 'recipes').sort((a, b) => a.data.order - b.data.order),
+};
+
+const groupTitles = { start: 'Start here', reference: 'Reference', recipes: 'Recipes' };
+const groupKickers: Record<keyof typeof groupTitles, string> = {
+  start: '/01',
+  reference: '/02',
+  recipes: '/03',
+};
+---
+<BaseLayout title="Docs · SerialPilot" description="Documentation for SerialPilot — getting started, API reference, parsers, mocking, CLIs, recipes, and the package matrix.">
+  <Topbar current="docs" />
+
+  <main id="main">
+    <DocsHeader
+      kicker="documentation index"
+      title="Read the manual."
+      description="Reference, recipes, and a getting-started guide. Each page is a single focused topic — install once, then dip in as you need each piece."
+    >
+      <h1
+        slot="title"
+        class="docs-header__title"
+        transition:name="docs-title"
+      >
+        Read the manual. <em>Or skim it.</em>
+      </h1>
+    </DocsHeader>
+
+    <div class="wrap docs-index">
+      {(['start', 'reference', 'recipes'] as const).map((g) => (
+        <section class="docs-index__group">
+          <header class="docs-index__head">
+            <p class="kicker">{groupKickers[g]} — {groupTitles[g]}</p>
+            <span class="docs-index__count">{String(groups[g].length).padStart(2, '0')} pages</span>
+          </header>
+
+          <ol class="docs-index__list">
+            {groups[g].map((e, i) => (
+              <li class="docs-index__row">
+                <a class="docs-index__link" href={link(`/docs/${e.id}`)}>
+                  <span class="docs-index__num">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="docs-index__title">{e.data.title}</span>
+                  <span class="docs-index__desc">{e.data.description}</span>
+                  <span class="docs-index__arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .docs-index {
+    padding-block: var(--s-8) var(--s-9);
+    display: grid;
+    gap: var(--s-8);
+  }
+
+  .docs-index__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .docs-index__count {
+    font: 500 var(--t-xs)/1 var(--font-chrome);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+  }
+
+  .docs-index__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .docs-index__row {
+    border-bottom: 1px solid var(--rule);
+  }
+  .docs-index__row:last-child {
+    border-bottom: 0;
+  }
+
+  .docs-index__link {
+    display: grid;
+    grid-template-columns: 6ch minmax(0, 0.9fr) minmax(0, 1.4fr) auto;
+    gap: var(--s-5);
+    align-items: baseline;
+    padding-block: var(--s-4);
+    color: var(--fg);
+    transition: color var(--t-fast) var(--ease-out),
+                padding var(--t-base-d) var(--ease-out),
+                background var(--t-fast) var(--ease-out);
+  }
+  .docs-index__link:hover {
+    background: linear-gradient(90deg, transparent 0%, oklch(0.66 0.190 45 / 0.04) 50%, transparent 100%);
+    padding-inline: var(--s-3);
+  }
+
+  .docs-index__num {
+    font: 500 var(--t-sm)/1 var(--font-chrome);
+    letter-spacing: 0.16em;
+    color: var(--fg-mute);
+    transition: color var(--t-fast) var(--ease-out);
+  }
+  .docs-index__link:hover .docs-index__num { color: var(--signal); }
+
+  .docs-index__title {
+    font-family: var(--font-display);
+    font-size: var(--t-lg);
+    font-weight: 400;
+    letter-spacing: -0.018em;
+    line-height: 1.05;
+    color: var(--fg);
+    font-variation-settings: 'opsz' 144, 'SOFT' 50;
+    transition: color var(--t-fast) var(--ease-out);
+  }
+  .docs-index__link:hover .docs-index__title { color: var(--signal); }
+
+  .docs-index__desc {
+    color: var(--fg-soft);
+    font-size: var(--t-sm);
+    line-height: 1.55;
+  }
+
+  .docs-index__arrow {
+    color: var(--fg-mute);
+    font-size: var(--t-md);
+    transform: translateX(0);
+    transition: transform var(--t-base-d) var(--ease-snap), color var(--t-fast) var(--ease-out);
+  }
+  .docs-index__link:hover .docs-index__arrow {
+    color: var(--signal);
+    transform: translateX(8px);
+  }
+
+  @media (max-width: 880px) {
+    .docs-index__link {
+      grid-template-columns: auto 1fr auto;
+      grid-template-areas:
+        'num title arrow'
+        '.   desc  desc';
+      gap: var(--s-2) var(--s-4);
+    }
+    .docs-index__num   { grid-area: num; }
+    .docs-index__title { grid-area: title; }
+    .docs-index__desc  { grid-area: desc; }
+    .docs-index__arrow { grid-area: arrow; align-self: center; }
+  }
+</style>

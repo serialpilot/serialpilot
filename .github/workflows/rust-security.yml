@@ -1,0 +1,25 @@
+name: Rust Security and Dependency Maintenance
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit-and-outdated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install maintenance tools
+        run: |
+          cargo install cargo-audit --locked
+          cargo install cargo-outdated --locked
+          cargo install cargo-deny --locked
+      - name: Cargo audit
+        run: cargo audit
+      - name: Cargo outdated (direct deps)
+        run: cargo outdated -R
+      - name: Cargo deny
+        working-directory: crates/bindings-rust
+        run: cargo deny check advisories licenses bans sources

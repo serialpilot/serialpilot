@@ -1,0 +1,23 @@
+node_modules/
+dist/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+*.tgz
+.DS_Store
+
+# Rust
+target/
+crates/*/target/
+
+# Native binding build artefacts
+build/
+prebuilds/
+*.node
+
+# Astro build cache
+.astro/
+.next/
+
+# Playwright MCP local captures
+.playwright-mcp/

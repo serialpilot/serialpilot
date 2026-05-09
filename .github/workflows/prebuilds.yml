@@ -1,0 +1,95 @@
+name: Prebuilds (bindings-cpp native binaries)
+
+on:
+  push:
+    tags:
+      - '@serialpilot/bindings-cpp@*'
+  workflow_dispatch:
+
+jobs:
+  prebuild-native:
+    name: ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: darwin-x64
+            os: macos-13
+            cmd: prebuildify
+          - target: darwin-arm64
+            os: macos-14
+            cmd: prebuildify
+          - target: win32-x64
+            os: windows-latest
+            cmd: prebuildify
+          - target: linux-x64
+            os: ubuntu-latest
+            cmd: prebuildify
+          - target: linux-arm64
+            os: ubuntu-latest
+            cmd: prebuildify-cross
+            cross-target: linux-arm64
+          - target: linux-armv7
+            os: ubuntu-latest
+            cmd: prebuildify-cross
+            cross-target: linux-armv7
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Linux build prerequisites
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libudev-dev build-essential
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build TypeScript
+        run: npm run -w @serialpilot/bindings-cpp build
+
+      - name: Prebuild native (${{ matrix.target }})
+        working-directory: packages/bindings-cpp
+        run: |
+          if [ "${{ matrix.cmd }}" = "prebuildify-cross" ]; then
+            npx prebuildify-cross --napi --target 20.0.0 --force --strip --verbose -i ${{ matrix.cross-target }}
+          else
+            npx prebuildify --napi --target 20.0.0 --force --strip --verbose
+          fi
+        shell: bash
+
+      - name: Upload prebuild artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebuilds-${{ matrix.target }}
+          path: packages/bindings-cpp/prebuilds/**
+          if-no-files-found: error
+
+  release:
+    name: Attach prebuilds to release
+    needs: prebuild-native
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: prebuilds-merged
+          pattern: prebuilds-*
+          merge-multiple: true
+
+      - name: Bundle prebuilds tarball
+        run: tar -czf prebuilds.tar.gz -C prebuilds-merged .
+
+      - name: Attach to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: prebuilds.tar.gz

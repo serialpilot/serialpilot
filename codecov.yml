@@ -1,0 +1,15 @@
+comment: false
+parsers:
+  javascript:
+    enable_partials: yes
+coverage:
+  status:
+    project:
+      default:
+        target: 70%
+        threshold: 1%
+    patch:
+      default:
+        target: 80%
+        threshold: 1%
+require_ci_to_pass: true

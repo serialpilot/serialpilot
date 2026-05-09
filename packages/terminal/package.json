@@ -1,0 +1,59 @@
+{
+  "name": "@serialpilot/terminal",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Ritesh Rana <contact@riteshrana.engineer>",
+  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/terminal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "directory": "packages/terminal"
+  },
+  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "serialpilot",
+    "terminal",
+    "cli",
+    "interactive",
+    "debug",
+    "serial"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc --build tsconfig-build.json"
+  },
+  "dependencies": {
+    "@serialpilot/bindings-cpp": "1.0.0",
+    "@serialpilot/stream": "1.0.0",
+    "commander": "12.1.0",
+    "enquirer": "2.4.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "bin": {
+    "serialpilot-terminal": "./dist/index.js"
+  }
+}

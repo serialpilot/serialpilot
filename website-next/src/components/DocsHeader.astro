@@ -1,0 +1,45 @@
+---
+interface Crumb { label: string; href?: string }
+interface Props {
+  kicker: string;             // e.g. "documentation index" or "/ reference"
+  title: string;
+  description?: string;
+  crumbs?: Crumb[];           // breadcrumb trail (deepest last)
+  transitionName?: string;    // for the title (continuity with landing)
+}
+const { kicker, title, description, crumbs, transitionName } = Astro.props;
+---
+<section class="docs-header">
+  <div class="docs-header__grid" aria-hidden="true"></div>
+
+  <div class="wrap docs-header__inner">
+    {crumbs && crumbs.length > 0 && (
+      <nav class="docs-header__crumbs" aria-label="Breadcrumb">
+        {crumbs.map((c, i) => (
+          <>
+            {i > 0 && <span class="docs-header__sep" aria-hidden="true">/</span>}
+            {c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}
+          </>
+        ))}
+      </nav>
+    )}
+
+    <p class="docs-header__kicker">
+      <span class="docs-header__rule"></span>
+      {kicker}
+    </p>
+
+    <h1
+      class="docs-header__title"
+      {...transitionName ? { 'transition:name': transitionName } : {}}
+    >
+      <slot name="title">{title}</slot>
+    </h1>
+
+    {description && (
+      <p class="docs-header__lede">{description}</p>
+    )}
+
+    <slot name="meta" />
+  </div>
+</section>

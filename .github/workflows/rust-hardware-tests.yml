@@ -1,0 +1,13 @@
+name: Rust Hardware Tests (Manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hardware-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Run hardware-gated tests
+        run: cargo test --workspace --all-targets --features hardware-tests

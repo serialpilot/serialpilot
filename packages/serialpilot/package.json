@@ -1,0 +1,83 @@
+{
+  "name": "serialpilot",
+  "version": "1.0.0",
+  "description": "Node.js package to access serial ports. Linux, OSX and Windows. Welcome your robotic JavaScript overlords. Better yet, program them!",
+  "license": "MIT",
+  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/serialpilot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "directory": "packages/serialpilot"
+  },
+  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "ccTalk",
+    "com port",
+    "COM",
+    "data logging",
+    "hardware",
+    "iot",
+    "johnny-five",
+    "modem",
+    "nodebots",
+    "RFID",
+    "robotics",
+    "sensor",
+    "serial port",
+    "serial",
+    "serialpilot",
+    "sms gateway",
+    "sms",
+    "stream",
+    "tty",
+    "UART"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "sideEffects": true,
+  "scripts": {
+    "build": "tsc --build tsconfig-build.json"
+  },
+  "dependencies": {
+    "@serialpilot/bindings-interface": "1.0.0",
+    "@serialpilot/binding-mock": "1.0.0",
+    "@serialpilot/bindings-cpp": "1.0.0",
+    "@serialpilot/parser-byte-length": "1.0.0",
+    "@serialpilot/parser-cctalk": "1.0.0",
+    "@serialpilot/parser-delimiter": "1.0.0",
+    "@serialpilot/parser-inter-byte-timeout": "1.0.0",
+    "@serialpilot/parser-packet-length": "1.0.0",
+    "@serialpilot/parser-readline": "1.0.0",
+    "@serialpilot/parser-ready": "1.0.0",
+    "@serialpilot/parser-regex": "1.0.0",
+    "@serialpilot/parser-slip-encoder": "1.0.0",
+    "@serialpilot/parser-spacepacket": "1.0.0",
+    "@serialpilot/parser-start-end": "1.0.0",
+    "@serialpilot/stream": "1.0.0",
+    "debug": "4.4.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "preferUnplugged": false
+}

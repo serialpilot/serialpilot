@@ -1,0 +1,89 @@
+---
+interface Tab {
+  id: string;
+  label: string;
+  raw: string;       // plain text used for copy
+  html: string;      // already-highlighted HTML to render
+}
+interface Props {
+  tabs: Tab[];
+  initial?: string;
+}
+const { tabs, initial = tabs[0]?.id } = Astro.props;
+---
+<div class="codecard">
+  <div class="codecard__tabs" role="tablist" aria-label="Code examples">
+    {tabs.map((t) => (
+      <button
+        role="tab"
+        id={`tab-${t.id}`}
+        aria-controls={`panel-${t.id}`}
+        aria-selected={t.id === initial ? 'true' : 'false'}
+        class:list={['tab', t.id === initial && 'is-active']}
+        data-target={t.id}
+      >{t.label}</button>
+    ))}
+    <button class="copy" type="button" aria-label="Copy code">
+      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+        <rect x="4" y="4" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        <path d="M3 11V3h8" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      </svg>
+      <span>copy</span>
+    </button>
+  </div>
+  {tabs.map((t) => (
+    <pre
+      id={`panel-${t.id}`}
+      role="tabpanel"
+      aria-labelledby={`tab-${t.id}`}
+      class:list={['panel', t.id === initial && 'is-active']}
+      hidden={t.id !== initial}
+      data-raw={t.raw}
+      set:html={t.html}
+    />
+  ))}
+</div>
+
+<script>
+  function bindCodeTabs() {
+    document.querySelectorAll<HTMLDivElement>('.codecard').forEach((card) => {
+      if (card.dataset.bound) return;
+      card.dataset.bound = '1';
+
+      const tabs = card.querySelectorAll<HTMLButtonElement>('.tab');
+      const panels = card.querySelectorAll<HTMLPreElement>('.panel');
+      const copy = card.querySelector<HTMLButtonElement>('.copy');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach((t) => {
+            t.classList.toggle('is-active', t === tab);
+            t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+          });
+          const target = tab.dataset.target;
+          panels.forEach((p) => {
+            const match = p.id === `panel-${target}`;
+            p.classList.toggle('is-active', match);
+            if (match) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
+          });
+        });
+      });
+
+      copy?.addEventListener('click', async () => {
+        const active = card.querySelector<HTMLPreElement>('.panel.is-active');
+        const text = active?.dataset.raw ?? active?.innerText ?? '';
+        try { await navigator.clipboard.writeText(text); } catch (_) {}
+        copy.classList.add('is-copied');
+        const span = copy.querySelector('span');
+        const prev = span?.textContent;
+        if (span) span.textContent = 'copied';
+        setTimeout(() => {
+          copy.classList.remove('is-copied');
+          if (span && prev) span.textContent = prev;
+        }, 1400);
+      });
+    });
+  }
+  bindCodeTabs();
+  document.addEventListener('astro:page-load', bindCodeTabs);
+</script>

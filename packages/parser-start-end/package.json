@@ -1,0 +1,51 @@
+{
+  "name": "@serialpilot/parser-start-end",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Ritesh Rana <contact@riteshrana.engineer>",
+  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/parser-start-end",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "directory": "packages/parser-start-end"
+  },
+  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "serialpilot",
+    "parser",
+    "transform",
+    "stream",
+    "start-end",
+    "framing",
+    "serial"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc --build tsconfig-build.json"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

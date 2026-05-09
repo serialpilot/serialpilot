@@ -1,0 +1,90 @@
+/* ============================================================
+   SerialPilot — Design Tokens
+   oklch + light-dark() — set color-scheme on :root, then call
+   light-dark(<light>, <dark>) anywhere a color is needed.
+   ============================================================ */
+
+:root {
+  /* Light theme is the only supported theme. light-dark() always picks
+     the first (light) argument because color-scheme is locked to light. */
+  color-scheme: light;
+
+  /* ---- Neutrals ----------------------------------------- */
+  --paper:        oklch(0.96 0.015 80);   /* warm cream */
+  --paper-soft:   oklch(0.93 0.018 80);
+  --paper-dim:    oklch(0.88 0.020 80);
+  --ink:          oklch(0.18 0.020 260);  /* deep ink */
+  --ink-soft:     oklch(0.30 0.022 260);
+  --ink-mute:     oklch(0.55 0.020 260);
+
+  /* ---- Signal accents (the brand) ----------------------- */
+  --signal:       oklch(0.66 0.190 45);   /* warm orange — kept */
+  --signal-hot:   oklch(0.72 0.210 45);
+  --signal-dim:   oklch(0.55 0.150 45);
+
+  /* ---- Oscilloscope phosphor traces --------------------- */
+  --trace-tx:     oklch(0.78 0.180 45);   /* tx — orange phosphor */
+  --trace-rx:     oklch(0.78 0.180 145);  /* rx — green phosphor */
+  --trace-aux:    oklch(0.78 0.130 215);  /* aux — cyan phosphor */
+  --trace-err:    oklch(0.65 0.220 25);   /* fault — red */
+
+  /* ---- Composed (light-dark resolves at use-time) ------- */
+  --bg:           light-dark(var(--paper),     oklch(0.13 0.018 260));
+  --bg-soft:      light-dark(var(--paper-soft), oklch(0.16 0.020 260));
+  --bg-dim:       light-dark(var(--paper-dim),  oklch(0.20 0.022 260));
+  --fg:           light-dark(var(--ink),        oklch(0.94 0.012 80));
+  --fg-soft:      light-dark(var(--ink-soft),   oklch(0.78 0.014 80));
+  --fg-mute:      light-dark(var(--ink-mute),   oklch(0.58 0.016 80));
+  --rule:         light-dark(oklch(0.18 0.02 260 / 0.12), oklch(0.96 0.015 80 / 0.14));
+  --rule-strong:  light-dark(oklch(0.18 0.02 260 / 0.32), oklch(0.96 0.015 80 / 0.32));
+  --frame:        light-dark(oklch(0.18 0.02 260 / 0.85), oklch(0.96 0.015 80 / 0.85));
+
+  /* Surfaces for the oscilloscope hero ------------------- */
+  --osc-bg:       light-dark(oklch(0.20 0.020 260), oklch(0.10 0.020 260));
+  --osc-grid:     light-dark(oklch(0.96 0.015 80 / 0.10), oklch(0.96 0.015 80 / 0.08));
+  --osc-grid-hot: light-dark(oklch(0.96 0.015 80 / 0.18), oklch(0.96 0.015 80 / 0.16));
+
+  /* ---- Type stacks -------------------------------------- */
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  --font-body:    'Inter Tight', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-chrome:  'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---- Type scale (fluid, clamp-based) ------------------ */
+  --t-xs:   clamp(0.72rem, 0.70rem + 0.10vw, 0.78rem);
+  --t-sm:   clamp(0.84rem, 0.81rem + 0.12vw, 0.92rem);
+  --t-base: clamp(0.96rem, 0.92rem + 0.18vw, 1.05rem);
+  --t-md:   clamp(1.10rem, 1.02rem + 0.42vw, 1.25rem);
+  --t-lg:   clamp(1.40rem, 1.20rem + 1.10vw, 1.85rem);
+  --t-xl:   clamp(2.00rem, 1.60rem + 2.20vw, 3.20rem);
+  --t-2xl:  clamp(3.00rem, 2.10rem + 4.80vw, 6.40rem);
+  --t-3xl:  clamp(4.00rem, 2.40rem + 8.00vw, 9.20rem);
+
+  /* ---- Spacing ------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 6.5rem;
+  --s-10: 9rem;
+
+  /* ---- Layout ------------------------------------------- */
+  --wrap:      min(1240px, 100% - 2.5rem);
+  --wrap-tight: min(720px, 100% - 2.5rem);
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --radius-3: 14px;
+
+  /* ---- Motion ------------------------------------------- */
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:   cubic-bezier(0.64, 0, 0.78, 0);
+  --ease-snap: cubic-bezier(0.32, 0.72, 0, 1);
+  --t-fast:   140ms;
+  --t-base-d: 280ms;
+  --t-slow:   620ms;
+}
+

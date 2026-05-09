@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "noEmit": false,
+    "noEmitOnError": true,
+    "outDir": "dist",
+    "rootDir": "lib",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "types": ["node", "debug"]
+  },
+  "include": ["lib"],
+  "exclude": ["node_modules", "**/*.test.ts", "lib/mocks/*", "dist"],
+  "references": [
+    { "path": "../bindings-interface/tsconfig-build.json" },
+    { "path": "../parser-readline/tsconfig-build.json" }
+  ]
+}

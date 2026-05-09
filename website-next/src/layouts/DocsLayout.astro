@@ -1,0 +1,88 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Topbar from '~/components/Topbar.astro';
+import Footer from '~/components/Footer.astro';
+import DocsHeader from '~/components/DocsHeader.astro';
+import DocsSidebar from '~/components/DocsSidebar.astro';
+import DocsTOC from '~/components/DocsTOC.astro';
+import '~/styles/prose.css';
+import { getCollection } from 'astro:content';
+
+interface Heading { depth: number; slug: string; text: string }
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  group: 'start' | 'reference' | 'recipes';
+  headings: Heading[];
+}
+
+const { id, title, description, group, headings } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const link = (p: string) => `${base}${p.replace(/^\//, '')}`;
+
+// Compute prev/next in the same group, by order field.
+const all = await getCollection('docs');
+const peers = all.filter((e) => e.data.group === group).sort((a, b) => a.data.order - b.data.order);
+const idx = peers.findIndex((e) => e.id === id);
+const prev = idx > 0 ? peers[idx - 1] : null;
+const next = idx >= 0 && idx < peers.length - 1 ? peers[idx + 1] : null;
+
+const groupTitles = { start: 'Start', reference: 'Reference', recipes: 'Recipes' };
+const groupKickers = { start: '/01', reference: '/02', recipes: '/03' };
+const editUrl = `https://github.com/riteshrana/serialpilot/edit/main/website-next/src/content/docs/${id}.md`;
+---
+<BaseLayout title={`${title} · SerialPilot Docs`} description={description}>
+  <Topbar current="docs" />
+
+  <main id="main">
+    <DocsHeader
+      kicker={`${groupKickers[group]} — ${groupTitles[group]}`}
+      title={title}
+      description={description}
+      crumbs={[
+        { label: 'Docs', href: link('/docs') },
+        { label: groupTitles[group] },
+        { label: title },
+      ]}
+      transitionName={`docs-${id}`}
+    />
+
+    <div class="wrap docs-shell">
+      <DocsSidebar current={id} />
+
+      <article class="docs-article">
+        <div class="prose">
+          <slot />
+        </div>
+
+        <p class="docs-edit">
+          <a href={editUrl} rel="noopener">Edit this page on GitHub <span aria-hidden="true">↗</span></a>
+        </p>
+
+        {(prev || next) && (
+          <nav class="docs-prevnext" aria-label="Page navigation">
+            {prev ? (
+              <a class="prev" href={link(`/docs/${prev.id}`)}>
+                <span class="label">← Previous</span>
+                <span class="title">{prev.data.title}</span>
+              </a>
+            ) : <span></span>}
+            {next ? (
+              <a class="next" href={link(`/docs/${next.id}`)}>
+                <span class="label">Next →</span>
+                <span class="title">{next.data.title}</span>
+              </a>
+            ) : <span></span>}
+          </nav>
+        )}
+      </article>
+
+      <DocsTOC headings={headings} />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

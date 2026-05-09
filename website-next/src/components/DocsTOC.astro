@@ -1,0 +1,56 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+interface Props {
+  headings: Heading[];
+}
+const { headings } = Astro.props;
+const list = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+{list.length > 0 && (
+  <aside class="docs-toc" aria-label="On this page">
+    <p class="docs-toc__head">On this page</p>
+    <ul>
+      {list.map((h) => (
+        <li class:list={[h.depth === 3 && 'is-h3']}>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
+
+<script>
+  function bindTocSpy() {
+    const toc = document.querySelector<HTMLElement>('.docs-toc');
+    if (!toc) return;
+    const links = Array.from(toc.querySelectorAll<HTMLAnchorElement>('a'));
+    const map = new Map<string, HTMLAnchorElement>();
+    links.forEach((a) => {
+      const id = decodeURIComponent(a.getAttribute('href')?.slice(1) ?? '');
+      if (id) map.set(id, a);
+    });
+    const headings = Array.from(map.keys())
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+    if (headings.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            links.forEach((a) => a.classList.remove('is-active'));
+            map.get(entry.target.id)?.classList.add('is-active');
+          }
+        }
+      },
+      { rootMargin: '-100px 0px -70% 0px', threshold: 0 },
+    );
+    headings.forEach((h) => io.observe(h));
+  }
+  bindTocSpy();
+  document.addEventListener('astro:page-load', bindTocSpy);
+</script>

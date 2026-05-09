@@ -1,0 +1,20 @@
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@serialpilot/bindings-cpp": [
+        "packages/bindings-cpp/dist"
+      ],
+      "@serialpilot/*": [
+        "packages/*/lib"
+      ],
+      "serialpilot": [
+        "packages/serialpilot/lib"
+      ]
+    },
+    "allowJs": false,
+    "checkJs": false,
+    "noEmit": true
+  }
+}

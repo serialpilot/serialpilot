@@ -1,0 +1,41 @@
+---
+interface Props {
+  cmd?: string;
+  variant?: 'topbar' | 'inline';
+}
+const { cmd = 'npm i serialpilot', variant = 'topbar' } = Astro.props;
+---
+<button
+  class:list={['install', variant === 'inline' && 'install--inline']}
+  type="button"
+  data-copy={cmd}
+  aria-label={`Copy install command: ${cmd}`}
+>
+  <span class="install__prompt" aria-hidden="true">$</span>
+  <span class="install__cmd">{cmd}</span>
+  <span class="install__hint" aria-hidden="true">copy</span>
+</button>
+
+<script>
+  function bindInstall() {
+    const btns = document.querySelectorAll<HTMLButtonElement>('.install[data-copy]');
+    btns.forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-copy') || '';
+        try { await navigator.clipboard.writeText(text); } catch (_) {}
+        const hint = btn.querySelector<HTMLElement>('.install__hint');
+        const prev = hint?.textContent;
+        if (hint) hint.textContent = 'copied';
+        btn.classList.add('is-copied');
+        setTimeout(() => {
+          if (hint && prev) hint.textContent = prev;
+          btn.classList.remove('is-copied');
+        }, 1400);
+      });
+    });
+  }
+  bindInstall();
+  document.addEventListener('astro:page-load', bindInstall);
+</script>

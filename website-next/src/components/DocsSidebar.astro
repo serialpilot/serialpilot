@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  current?: string; // current entry id, e.g. "getting-started"
+}
+const { current } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const link = (slug: string) => `${base}docs${slug ? '/' + slug : ''}`;
+
+const all = await getCollection('docs');
+const groups: Record<string, typeof all> = { start: [], reference: [], recipes: [] };
+for (const e of all) groups[e.data.group]?.push(e);
+for (const g of Object.values(groups)) g.sort((a, b) => a.data.order - b.data.order);
+
+const titles: Record<string, string> = {
+  start: 'Start',
+  reference: 'Reference',
+  recipes: 'Recipes',
+};
+---
+<nav class="docs-sidebar" aria-label="Docs navigation">
+  <a href={link('')} class:list={['docs-sidebar__home', current === undefined && 'is-active']}
+     style="display:block; padding: 0.45rem 0.7rem; margin-bottom: var(--s-3); font: 500 var(--t-xs)/1 var(--font-chrome); letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-mute);">
+     ← Docs home
+  </a>
+  {(['start', 'reference', 'recipes'] as const).map((g) => (
+    <div class="docs-sidebar__group">
+      <p class="docs-sidebar__head">{titles[g]}</p>
+      <ul>
+        {groups[g].map((e) => (
+          <li>
+            <a
+              href={link(e.id)}
+              class:list={[current === e.id && 'is-active']}
+              aria-current={current === e.id ? 'page' : undefined}
+            >{e.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</nav>

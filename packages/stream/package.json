@@ -1,0 +1,55 @@
+{
+  "name": "@serialpilot/stream",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Ritesh Rana <contact@riteshrana.engineer>",
+  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/stream",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "directory": "packages/stream"
+  },
+  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "serialpilot",
+    "stream",
+    "node-stream",
+    "duplex",
+    "transform",
+    "serial"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc --build tsconfig-build.json"
+  },
+  "dependencies": {
+    "@serialpilot/bindings-interface": "1.0.0",
+    "debug": "4.4.0"
+  },
+  "devDependencies": {
+    "@serialpilot/binding-mock": "1.0.0",
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

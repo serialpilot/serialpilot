@@ -1,0 +1,127 @@
+---
+import InstallButton from './InstallButton.astro';
+
+interface Props {
+  current?: 'home' | 'docs' | string;
+}
+const { current = 'home' } = Astro.props;
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const link = (p: string) => `${base}${p.replace(/^\//, '')}`;
+---
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href={link('/')} transition:name="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <img src={link('/assets/serialpilot-logo.png')} alt="" width="22" height="22" />
+      </span>
+      <span class="brand__name">SerialPilot</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {current === 'home' ? (
+        <>
+          <a href="#features" class="nav__link">Overview</a>
+          <a href={link('/docs')} class="nav__link">Docs</a>
+          <a href="#packages" class="nav__link">Packages</a>
+        </>
+      ) : (
+        <>
+          <a href={link('/')} class="nav__link">Home</a>
+          <a href={link('/docs')} class:list={['nav__link', current === 'docs' && 'is-active']} aria-current={current === 'docs' ? 'page' : undefined}>Docs</a>
+        </>
+      )}
+      <span class="nav__sep" aria-hidden="true"></span>
+      <a href="https://github.com/riteshrana/serialpilot" rel="noopener" class="nav__link nav__link--ext">GitHub<span class="nav__ext-arrow" aria-hidden="true">↗</span></a>
+      <a href="https://www.npmjs.com/package/serialpilot" rel="noopener" class="nav__link nav__link--ext">npm<span class="nav__ext-arrow" aria-hidden="true">↗</span></a>
+    </nav>
+
+    <InstallButton />
+
+    <button class="menu" type="button" aria-controls="m-nav" aria-expanded="false" aria-label="Open menu">
+      <span class="menu__bars" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </div>
+
+  <span class="topbar__progress" aria-hidden="true"></span>
+
+  <nav id="m-nav" class="m-nav" aria-label="Mobile" hidden>
+    <span class="m-nav__label" aria-hidden="true">// navigate</span>
+    {current === 'home' ? (
+      <>
+        <a class="m-nav__link" href="#features"><span class="m-nav__idx">01</span><span class="m-nav__name">Overview</span></a>
+        <a class="m-nav__link" href={link('/docs')}><span class="m-nav__idx">02</span><span class="m-nav__name">Docs</span></a>
+        <a class="m-nav__link" href="#packages"><span class="m-nav__idx">03</span><span class="m-nav__name">Packages</span></a>
+      </>
+    ) : (
+      <>
+        <a class="m-nav__link" href={link('/')}><span class="m-nav__idx">01</span><span class="m-nav__name">Home</span></a>
+        <a class:list={['m-nav__link', current === 'docs' && 'is-active']} href={link('/docs')} aria-current={current === 'docs' ? 'page' : undefined}><span class="m-nav__idx">02</span><span class="m-nav__name">Docs</span></a>
+      </>
+    )}
+    <span class="m-nav__rule" aria-hidden="true"></span>
+    <a class="m-nav__link m-nav__link--ext" href="https://github.com/riteshrana/serialpilot" rel="noopener"><span class="m-nav__name">GitHub</span><span class="m-nav__arrow" aria-hidden="true">↗</span></a>
+    <a class="m-nav__link m-nav__link--ext" href="https://www.npmjs.com/package/serialpilot" rel="noopener"><span class="m-nav__name">npm</span><span class="m-nav__arrow" aria-hidden="true">↗</span></a>
+  </nav>
+</header>
+
+<script>
+  function bindTopbar() {
+    const btn = document.querySelector<HTMLButtonElement>('.menu');
+    const nav = document.getElementById('m-nav');
+    const header = document.querySelector<HTMLElement>('.topbar');
+    if (!btn || !nav || !header) return;
+    if ((btn as any).__bound) return;
+    (btn as any).__bound = true;
+
+    const setOpen = (open: boolean) => {
+      if (open) {
+        nav.removeAttribute('hidden');
+        // Force reflow so the entrance transition runs even on first open.
+        void nav.getBoundingClientRect();
+        nav.classList.add('is-open');
+      } else {
+        nav.classList.remove('is-open');
+        // Wait for the exit transition before re-hiding from AT.
+        const onEnd = () => {
+          if (!nav.classList.contains('is-open')) nav.setAttribute('hidden', '');
+          nav.removeEventListener('transitionend', onEnd);
+        };
+        nav.addEventListener('transitionend', onEnd);
+      }
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      header.classList.toggle('is-menu-open', open);
+      document.documentElement.classList.toggle('is-menu-open', open);
+    };
+
+    btn.addEventListener('click', () => {
+      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Close on link tap, ESC, or viewport widening past mobile breakpoint.
+    nav.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement | null;
+      if (t && t.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') setOpen(false);
+    });
+    const mq = window.matchMedia('(min-width: 881px)');
+    mq.addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+
+    // Sticky-shrink: add .is-stuck once we've scrolled past the hero band
+    const topbar = document.querySelector<HTMLElement>('.topbar');
+    if (topbar) {
+      const onScroll = () => {
+        topbar.classList.toggle('is-stuck', window.scrollY > 32);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+  }
+  bindTopbar();
+  document.addEventListener('astro:page-load', bindTopbar);
+</script>

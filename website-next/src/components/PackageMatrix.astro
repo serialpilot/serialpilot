@@ -1,0 +1,50 @@
+---
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : rawBase + '/';
+const link = (p: string) => `${base}${p.replace(/^\//, '')}`;
+---
+<div class="pkg-grid">
+  <a class="pkg pkg--lead" href={link('/docs/packages')}>
+    <h3>serialpilot</h3>
+    <p>The meta package. Sensible defaults, all parsers re-exported, autodetected native bindings.</p>
+    <span class="pkg__cta" aria-hidden="true">Package matrix ↗</span>
+  </a>
+
+  <div class="pkg-col">
+    <p class="pkg-col__head">Bindings</p>
+    <a class="pkg" href={link('/docs/packages')}><h4>@serialpilot/bindings-cpp</h4><p>N-API native bindings, with prebuilds.</p></a>
+    <a class="pkg" href={link('/docs/packages')}><h4>@serialpilot/bindings-interface</h4><p>TypeScript surface for custom bindings.</p></a>
+    <a class="pkg" href={link('/docs/mocking')}><h4>@serialpilot/binding-mock</h4><p>In-memory port for unit tests.</p></a>
+  </div>
+
+  <div class="pkg-col">
+    <p class="pkg-col__head">Interfaces &amp; helpers</p>
+    <a class="pkg" href={link('/docs/api')}><h4>@serialpilot/stream</h4><p>Node.js Stream wrapper around any binding.</p></a>
+    <a class="pkg" href={link('/docs/recipes/reconnect')}><h4>@serialpilot/reconnect</h4><p>Survive cable yanks and device resets.</p></a>
+    <a class="pkg" href={link('/docs/recipes/modbus-rtu')}><h4>@serialpilot/command-queue</h4><p>Request/response over half-duplex links.</p></a>
+  </div>
+
+  <div class="pkg-col">
+    <p class="pkg-col__head">CLI</p>
+    <a class="pkg" href={link('/docs/cli')}><h4>@serialpilot/list</h4><p><code>serialpilot-list</code> — enumerate ports.</p></a>
+    <a class="pkg" href={link('/docs/cli')}><h4>@serialpilot/terminal</h4><p><code>serialpilot-terminal</code> — interactive console.</p></a>
+    <a class="pkg" href={link('/docs/cli')}><h4>@serialpilot/repl</h4><p><code>serialpilot-repl</code> — scriptable Node REPL.</p></a>
+  </div>
+
+  <div class="pkg-col pkg-col--wide">
+    <p class="pkg-col__head">Parsers</p>
+    <ul class="pkg-list">
+      <li><a href={link('/docs/parsers#byte-length')}>parser-byte-length</a><span>fixed-size frames</span></li>
+      <li><a href={link('/docs/parsers#cctalk')}>parser-cctalk</a><span>ccTalk validators</span></li>
+      <li><a href={link('/docs/parsers#delimiter')}>parser-delimiter</a><span>split on byte sequence</span></li>
+      <li><a href={link('/docs/parsers#inter-byte')}>parser-inter-byte-timeout</a><span>quiescence framing</span></li>
+      <li><a href={link('/docs/parsers#packet-length')}>parser-packet-length</a><span>length-prefixed packets</span></li>
+      <li><a href={link('/docs/parsers#readline')}>parser-readline</a><span>line-by-line text</span></li>
+      <li><a href={link('/docs/parsers#ready')}>parser-ready</a><span>wait for a sentinel</span></li>
+      <li><a href={link('/docs/parsers#regex')}>parser-regex</a><span>split on a pattern</span></li>
+      <li><a href={link('/docs/parsers#slip')}>parser-slip-encoder</a><span>RFC 1055 SLIP framing</span></li>
+      <li><a href={link('/docs/parsers#spacepacket')}>parser-spacepacket</a><span>CCSDS Space Packet</span></li>
+      <li><a href={link('/docs/parsers#start-end')}>parser-start-end</a><span>STX/ETX-style frames</span></li>
+    </ul>
+  </div>
+</div>

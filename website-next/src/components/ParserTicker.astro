@@ -1,0 +1,27 @@
+---
+const parsers = [
+  { name: 'readline', desc: 'line-by-line text' },
+  { name: 'delimiter', desc: 'split on a byte sequence' },
+  { name: 'byte-length', desc: 'fixed-size frames' },
+  { name: 'inter-byte-timeout', desc: 'quiescence framing' },
+  { name: 'packet-length', desc: 'length-prefixed packets' },
+  { name: 'cctalk', desc: 'coin / bill validators' },
+  { name: 'regex', desc: 'split on a pattern' },
+  { name: 'ready', desc: 'wait for sentinel' },
+  { name: 'slip-encoder', desc: 'RFC 1055 framing' },
+  { name: 'spacepacket', desc: 'CCSDS Space Packet' },
+  { name: 'start-end', desc: 'STX / ETX frames' },
+];
+// Repeat once for seamless marquee
+const tape = [...parsers, ...parsers];
+---
+<section class="ticker" aria-label="Parser library">
+  <div class="ticker__track">
+    {tape.map((p) => (
+      <span class="ticker__item">
+        <em>parser-{p.name}</em>
+        <span>{p.desc}</span>
+      </span>
+    ))}
+  </div>
+</section>

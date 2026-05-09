@@ -1,0 +1,59 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '~/styles/tokens.css';
+import '~/styles/global.css';
+import '~/styles/instrument.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  noTransitions?: boolean;
+}
+
+const {
+  title,
+  description = 'Cross-platform serial port access for Node.js. Linux, macOS, and Windows. Composable bindings, parsers, and stream interfaces.',
+  ogImage = '/og-image.png',
+  noTransitions = false,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+const join = (p: string) => `${base}${p.replace(/^\//, '')}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const og = new URL(join(ogImage.replace(/^\//, '')), Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0F1115" />
+
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={og} />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href={join('favicon-32.png')} />
+  <link rel="apple-touch-icon" href={join('assets/serialpilot-logo.png')} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+  />
+
+  {!noTransitions && <ClientRouter />}
+  <slot name="head" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <slot />
+</body>
+</html>
