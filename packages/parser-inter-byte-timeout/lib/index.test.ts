@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import sinon from 'sinon'
 import { InterByteTimeoutParser } from './'
 import { assert } from '../../../test/assert'

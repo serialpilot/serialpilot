@@ -1,4 +1,3 @@
-/* eslint-disable mocha/consistent-spacing-between-blocks */
 import { randomBytes } from 'crypto'
 import { SerialPilot as SerialPilotAutoDetect, SerialPilotMock } from './'
 import { assert } from '../../../test/assert'

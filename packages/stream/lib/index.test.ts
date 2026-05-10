@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import sinon from 'sinon'
 import { randomBytes } from 'crypto'
 import { MockBinding, MockBindingInterface } from '@serialpilot/binding-mock'

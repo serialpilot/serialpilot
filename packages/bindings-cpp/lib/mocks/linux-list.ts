@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Mocks fs.read for listLinux
 
 import { EventEmitter } from 'events'

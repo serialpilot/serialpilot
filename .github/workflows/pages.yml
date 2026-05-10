@@ -1,11 +1,9 @@
 name: Deploy website to GitHub Pages
 
+# Disabled until website-next is finalized and Pages is enabled on the repo.
+# Re-enable by restoring the push trigger AND enabling Pages via:
+#   gh api -X POST repos/serialpilot/serialpilot/pages -f 'source[branch]=main'
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'website/**'
-      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
