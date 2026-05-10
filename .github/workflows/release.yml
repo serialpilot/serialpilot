@@ -42,6 +42,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # TEMPORARY for v1.0.0 bootstrap. Once Trusted Publishing is configured
-          # per-package on npmjs.com, remove this line + delete the NPM_TOKEN secret
-          # so future releases use OIDC only.
+          # per-package on npmjs.com, remove these two lines + delete the NPM_TOKEN
+          # secret so future releases use OIDC only.
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
