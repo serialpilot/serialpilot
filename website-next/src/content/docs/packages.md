@@ -91,10 +91,30 @@ group: reference
 </tbody>
 </table>
 
+<h2 id="drivers">Drivers</h2>
+<p>Higher-level device drivers live in the <a href="https://github.com/serialpilot/serialpilot-drivers"><code>serialpilot-drivers</code></a> monorepo. Each driver is a standalone npm package that takes a <code>Transport</code> (usually a <code>SerialPilot</code> instance) and emits typed events or provides a request/response API.</p>
+<table>
+<thead><tr><th>Package</th><th>Protocol</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-kit" rel="noopener"><code>@serialpilot/driver-kit</code></a></td><td>—</td><td>Shared building blocks: <code>Device</code> base class, <code>Transport</code> interface, <code>MockTransport</code>, <code>RequestQueue</code>, <code>LineBuffer</code>, <code>createLogger</code>.</td></tr>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-gps" rel="noopener"><code>@serialpilot/driver-gps</code></a></td><td>NMEA 0183</td><td>GPS receiver — GGA/RMC/GSA/GSV, typed <code>Fix</code> events.</td></tr>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-grbl" rel="noopener"><code>@serialpilot/driver-grbl</code></a></td><td>GRBL 1.1</td><td>CNC controller — typed status, command-queued G-code, real-time control.</td></tr>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-esp-flasher" rel="noopener"><code>@serialpilot/driver-esp-flasher</code></a></td><td>ESP ROM</td><td>ESP32/ESP8266 ROM-bootloader flasher — SLIP framing, chip detect, flash with progress.</td></tr>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-at" rel="noopener"><code>@serialpilot/driver-at</code></a></td><td>AT commands</td><td>Generic AT-command framework — cellular/LoRa/WiFi-via-AT modems.</td></tr>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-modbus-rtu" rel="noopener"><code>@serialpilot/driver-modbus-rtu</code></a></td><td>Modbus RTU</td><td>Industrial automation — read/write holding/input registers, CRC-16, typed errors.</td></tr>
+<tr><td><a href="https://www.npmjs.com/package/@serialpilot/driver-plantower" rel="noopener"><code>@serialpilot/driver-plantower</code></a></td><td>Plantower PM</td><td>PMS5003/PMS1003/PMS3003 particulate matter sensor — active-mode readings with checksum validation.</td></tr>
+</tbody>
+</table>
+
 <h2 id="layering">How the layers fit</h2>
-<pre data-lang="text"><code>┌────────────────────────────────────────────────────┐
-│  serialpilot      (meta — re-exports everything)   │
-└────────────────────────────────────────────────────┘
+<pre data-lang="text"><code>┌─────────────────────────────────────────────────────┐
+│  Drivers (GPS, GRBL, ESP, AT, Modbus, Plantower)    │
+│  ↑ each takes a Transport, emits typed events       │
+└─────────────────────────────────────────────────────┘
+         │
+┌────────▼────────────────────────────────────────────┐
+│  serialpilot      (meta — re-exports everything)    │
+└─────────────────────────────────────────────────────┘
 │            │             │
 ┌────▼────┐  ┌────▼────┐   ┌────▼────────────┐
 │ stream  │  │ parsers │   │ helpers         │
@@ -118,6 +138,7 @@ group: reference
 <li>Plus line-oriented protocols? Add <code>@serialpilot/parser-readline</code>.</li>
 <li>Need the mock for tests but only in dev? <code>npm i -D @serialpilot/binding-mock</code>.</li>
 <li>Production resilience? <code>@serialpilot/reconnect</code>.</li>
+<li>Talking to a specific protocol? Install the relevant driver from <a href="https://github.com/serialpilot/serialpilot-drivers">serialpilot-drivers</a> — e.g. <code>@serialpilot/driver-modbus-rtu</code> for industrial equipment, or <code>@serialpilot/driver-gps</code> for GPS receivers.</li>
 </ul>
 
 <div class="page-foot">

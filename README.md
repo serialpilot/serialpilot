@@ -100,6 +100,11 @@ Parsers turn raw binary data into usable messages — converting bytes to text, 
 - [`@serialpilot/terminal`](packages/terminal) — `serialpilot-terminal`, interactive console.
 - [`@serialpilot/repl`](packages/repl) — `serialpilot-repl`, scriptable Node REPL.
 
+### Sister repos
+
+- [`serialpilot-protocols`](https://github.com/serialpilot/serialpilot-protocols) — pure-function protocol codecs and matching Transform-stream parsers (CRC kit, COBS, HDLC, Modbus RTU framing). Browser-clean.
+- [`serialpilot-drivers`](https://github.com/serialpilot/serialpilot-drivers) — ready-to-use device drivers: GPS/NMEA, GRBL, ESP flasher, AT modem, Modbus RTU, and Plantower PM sensors. Built on `@serialpilot/driver-kit`.
+
 ## Developing
 
 1. Clone this repo: `git clone git@github.com:serialpilot/serialpilot.git`
