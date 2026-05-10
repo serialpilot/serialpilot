@@ -1,6 +1,7 @@
 {
   "name": "@serialpilot/parser-spacepacket",
   "version": "1.0.0",
+  "description": "A transform stream for the CCSDS Space Packet protocol.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
   "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/parser-spacepacket",

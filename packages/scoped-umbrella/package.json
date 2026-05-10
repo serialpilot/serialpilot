@@ -1,14 +1,13 @@
 {
-  "name": "@serialpilot/repl",
+  "name": "@serialpilot/serialpilot",
   "version": "1.0.0",
-  "description": "A scriptable Node REPL bound to a serial port. Includes the `serialpilot-repl` CLI.",
+  "description": "Scoped alias for the SerialPilot umbrella package — re-exports everything from `serialpilot`. Use whichever name fits your import style.",
   "license": "MIT",
-  "author": "Ritesh Rana <contact@riteshrana.engineer>",
-  "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/repl",
+  "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/scoped-umbrella",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/serialpilot/serialpilot.git",
-    "directory": "packages/repl"
+    "directory": "packages/scoped-umbrella"
   },
   "bugs": "https://github.com/serialpilot/serialpilot/issues",
   "main": "./dist/index.js",
@@ -27,12 +26,14 @@
     "LICENSE"
   ],
   "keywords": [
+    "serial port",
+    "serial",
     "serialpilot",
-    "repl",
-    "cli",
-    "interactive",
-    "debug",
-    "serial"
+    "hardware",
+    "iot",
+    "robotics",
+    "tty",
+    "UART"
   ],
   "engines": {
     "node": ">=20.0.0"
@@ -42,7 +43,6 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "promirepl": "^2.0.1",
     "serialpilot": "1.0.0"
   },
   "devDependencies": {
@@ -51,8 +51,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "bin": {
-    "serialpilot-repl": "./dist/index.js"
   }
 }

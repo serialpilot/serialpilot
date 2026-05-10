@@ -1,6 +1,7 @@
 {
   "name": "@serialpilot/stream",
   "version": "1.0.0",
+  "description": "Node.js Duplex Stream interface over a SerialPilot binding.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
   "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/stream",

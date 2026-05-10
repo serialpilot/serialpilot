@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/serialpilot/serialpilot">
-    <img src="https://raw.githubusercontent.com/serialpilot/serialpilot/main/website/assets/serialpilot-logo.png" width="120" height="120" alt="SerialPilot">
+    <img src="https://raw.githubusercontent.com/serialpilot/serialpilot/main/assets/serialpilot-logo.png" width="120" height="120" alt="SerialPilot">
   </a>
 </p>
 
