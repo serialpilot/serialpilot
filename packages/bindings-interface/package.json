@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/bindings-interface",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SerialPilot Bindings TypeScript Types",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",

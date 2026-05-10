@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/parser-readline",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A transform stream that emits a chunk of data each time a newline is received.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
@@ -44,7 +44,7 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "@serialpilot/parser-delimiter": "1.0.0"
+    "@serialpilot/parser-delimiter": "1.0.1"
   },
   "devDependencies": {
     "typescript": "5.9.3"

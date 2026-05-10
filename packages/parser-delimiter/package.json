@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/parser-delimiter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A transform stream that emits data each time a delimiter byte sequence is received.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",

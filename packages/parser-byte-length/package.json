@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/parser-byte-length",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A transform stream that emits data as a buffer of fixed byte length.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",

@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/parser-regex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A transform stream that splits incoming text on a regular expression.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
