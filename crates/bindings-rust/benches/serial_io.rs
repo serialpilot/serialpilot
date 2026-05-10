@@ -1,8 +1,10 @@
-// `PortBuilder::exclusive` is unix-only, so this bench can't compile on Windows.
-#![cfg(unix)]
+// `PortBuilder::exclusive` is unix-only. On non-unix targets the criterion
+// benches are no-ops and we provide a stub `main` so the bench still compiles.
 
+#[cfg(unix)]
 use criterion::{criterion_group, criterion_main, Criterion};
 
+#[cfg(unix)]
 fn bench_builder_construction(c: &mut Criterion) {
     c.bench_function("builder:new+settings", |b| {
         b.iter(|| {
@@ -17,6 +19,7 @@ fn bench_builder_construction(c: &mut Criterion) {
     });
 }
 
+#[cfg(unix)]
 fn bench_port_enumeration(c: &mut Criterion) {
     c.bench_function("available_ports", |b| {
         b.iter(|| {
@@ -25,9 +28,14 @@ fn bench_port_enumeration(c: &mut Criterion) {
     });
 }
 
+#[cfg(unix)]
 criterion_group!(
     serialpilot_benches,
     bench_builder_construction,
     bench_port_enumeration
 );
+#[cfg(unix)]
 criterion_main!(serialpilot_benches);
+
+#[cfg(not(unix))]
+fn main() {}
