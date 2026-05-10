@@ -1,9 +1,11 @@
 name: Deploy website to GitHub Pages
 
-# Disabled until website-next is finalized and Pages is enabled on the repo.
-# Re-enable by restoring the push trigger AND enabling Pages via:
-#   gh api -X POST repos/serialpilot/serialpilot/pages -f 'source[branch]=main'
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'website-next/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -18,12 +20,29 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website-next
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: website-next/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro site
+        run: npm run build
+
       - uses: actions/configure-pages@v5
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: website
+          path: website-next/dist
 
   deploy:
     needs: build
