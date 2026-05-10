@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/serialpilot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scoped alias for the SerialPilot umbrella package — re-exports everything from `serialpilot`. Use whichever name fits your import style.",
   "license": "MIT",
   "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/scoped-umbrella",
@@ -43,7 +43,7 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "serialpilot": "1.0.0"
+    "serialpilot": "1.0.1"
   },
   "devDependencies": {
     "typescript": "5.9.3"

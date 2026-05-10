@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/binding-mock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The mock serialpilot bindings for testing",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
@@ -44,7 +44,7 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "@serialpilot/bindings-interface": "1.0.0",
+    "@serialpilot/bindings-interface": "1.0.1",
     "debug": "4.4.0"
   },
   "devDependencies": {

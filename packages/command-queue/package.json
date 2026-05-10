@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/command-queue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Request-response command queue for SerialPilot (AT commands, Modbus, etc.)",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
@@ -43,9 +43,9 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "@serialpilot/bindings-interface": "1.0.0",
-    "@serialpilot/parser-readline": "1.0.0",
-    "@serialpilot/stream": "1.0.0"
+    "@serialpilot/bindings-interface": "1.0.1",
+    "@serialpilot/parser-readline": "1.0.1",
+    "@serialpilot/stream": "1.0.1"
   },
   "devDependencies": {
     "typescript": "5.9.3"

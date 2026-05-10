@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/repl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A scriptable Node REPL bound to a serial port. Includes the `serialpilot-repl` CLI.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "promirepl": "^2.0.1",
-    "serialpilot": "1.0.0"
+    "serialpilot": "1.0.1"
   },
   "devDependencies": {
     "typescript": "5.9.3"

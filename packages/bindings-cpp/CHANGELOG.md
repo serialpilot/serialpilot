@@ -1,4 +1,4 @@
-# Change Log
+# @serialpilot/bindings-cpp
 
 ## 1.0.1
 
@@ -10,8 +10,6 @@
   - Add a one-line `description` to every package.json that was missing one — npm pages now show the actual purpose instead of raw `<p align="center">` HTML from the README.
   - Fix broken logo paths in every package README (`website/assets/serialpilot-logo.png` → `assets/serialpilot-logo.png`).
 
-All notable changes to this project will be documented in this file.
-
-## 1.0.0 (2026-05-08)
-
-- Initial release of `@serialpilot/parser-regex` v1.0.0.
+- Updated dependencies [48dc58d]
+  - @serialpilot/bindings-interface@1.0.1
+  - @serialpilot/parser-readline@1.0.1

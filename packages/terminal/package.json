@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/terminal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An interactive serial terminal. Includes the `serialpilot-terminal` CLI.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
@@ -42,8 +42,8 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "@serialpilot/bindings-cpp": "1.0.0",
-    "@serialpilot/stream": "1.0.0",
+    "@serialpilot/bindings-cpp": "1.0.1",
+    "@serialpilot/stream": "1.0.1",
     "commander": "12.1.0",
     "enquirer": "2.4.1"
   },

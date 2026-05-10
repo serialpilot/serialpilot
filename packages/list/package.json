@@ -1,6 +1,6 @@
 {
   "name": "@serialpilot/list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Enumerate the serial ports available on the system. Includes the `serialpilot-list` CLI.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
@@ -43,7 +43,7 @@
     "build": "tsc --build tsconfig-build.json"
   },
   "dependencies": {
-    "@serialpilot/bindings-cpp": "1.0.0",
+    "@serialpilot/bindings-cpp": "1.0.1",
     "commander": "12.1.0"
   },
   "devDependencies": {
