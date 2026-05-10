@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://github.com/riteshrana/serialpilot">
-    <img src="https://raw.githubusercontent.com/riteshrana/serialpilot/main/website/assets/serialpilot-logo.png" width="120" height="120" alt="SerialPilot">
+  <a href="https://github.com/serialpilot/serialpilot">
+    <img src="https://raw.githubusercontent.com/serialpilot/serialpilot/main/website/assets/serialpilot-logo.png" width="120" height="120" alt="SerialPilot">
   </a>
 </p>
 
@@ -10,8 +10,8 @@
 <p align="center">
   <a href="https://crates.io/crates/serialpilot-rust">crates.io</a> ·
   <a href="https://docs.rs/serialpilot-rust">docs.rs</a> ·
-  <a href="https://github.com/riteshrana/serialpilot">GitHub</a> ·
-  <a href="https://github.com/riteshrana/serialpilot/blob/main/LICENSE">MIT</a>
+  <a href="https://github.com/serialpilot/serialpilot">GitHub</a> ·
+  <a href="https://github.com/serialpilot/serialpilot/blob/main/LICENSE">MIT</a>
 </p>
 
 <p align="center">
@@ -19,7 +19,7 @@
   <a href="https://crates.io/crates/serialpilot-rust"><img alt="downloads" src="https://img.shields.io/crates/d/serialpilot-rust?style=flat-square"></a>
   <a href="https://docs.rs/serialpilot-rust"><img alt="docs.rs" src="https://img.shields.io/docsrs/serialpilot-rust?style=flat-square&logo=docs.rs"></a>
   <a href="https://www.rust-lang.org"><img alt="MSRV" src="https://img.shields.io/badge/MSRV-1.80%2B-CE412B?style=flat-square&logo=rust&logoColor=white"></a>
-  <a href="https://github.com/riteshrana/serialpilot/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square"></a>
+  <a href="https://github.com/serialpilot/serialpilot/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square"></a>
 </p>
 
 ---

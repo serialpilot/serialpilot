@@ -4,13 +4,13 @@
   "description": "Request-response command queue for SerialPilot (AT commands, Modbus, etc.)",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
-  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/command-queue",
+  "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/command-queue",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "url": "git+https://github.com/serialpilot/serialpilot.git",
     "directory": "packages/command-queue"
   },
-  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "bugs": "https://github.com/serialpilot/serialpilot/issues",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

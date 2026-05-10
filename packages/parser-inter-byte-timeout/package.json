@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
-  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/parser-inter-byte-timeout",
+  "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/parser-inter-byte-timeout",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "url": "git+https://github.com/serialpilot/serialpilot.git",
     "directory": "packages/parser-inter-byte-timeout"
   },
-  "bugs": "https://github.com/riteshrana/serialpilot/issues",
+  "bugs": "https://github.com/serialpilot/serialpilot/issues",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

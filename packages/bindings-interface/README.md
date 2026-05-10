@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://github.com/riteshrana/serialpilot">
-    <img src="https://raw.githubusercontent.com/riteshrana/serialpilot/main/website/assets/serialpilot-logo.png" width="120" height="120" alt="SerialPilot">
+  <a href="https://github.com/serialpilot/serialpilot">
+    <img src="https://raw.githubusercontent.com/serialpilot/serialpilot/main/website/assets/serialpilot-logo.png" width="120" height="120" alt="SerialPilot">
   </a>
 </p>
 
@@ -8,9 +8,9 @@
 <p align="center"><em>TypeScript surface every SerialPilot binding implements.</em></p>
 
 <p align="center">
-  <a href="https://github.com/riteshrana/serialpilot#readme">Docs</a> ·
+  <a href="https://github.com/serialpilot/serialpilot#readme">Docs</a> ·
   <a href="https://www.npmjs.com/package/@serialpilot/bindings-interface">npm</a> ·
-  <a href="https://github.com/riteshrana/serialpilot/blob/main/LICENSE">MIT</a>
+  <a href="https://github.com/serialpilot/serialpilot/blob/main/LICENSE">MIT</a>
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
   <a href="https://www.npmjs.com/package/@serialpilot/bindings-interface"><img alt="downloads" src="https://img.shields.io/npm/dm/@serialpilot/bindings-interface?style=flat-square&color=blue"></a>
   <a href="https://bundlephobia.com/package/@serialpilot/bindings-interface"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/@serialpilot/bindings-interface?style=flat-square&label=minzip"></a>
   <a href="https://www.typescriptlang.org"><img alt="types" src="https://img.shields.io/npm/types/@serialpilot/bindings-interface?style=flat-square&color=3178C6&logo=typescript&logoColor=white"></a>
-  <a href="https://github.com/riteshrana/serialpilot/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square"></a>
+  <a href="https://github.com/serialpilot/serialpilot/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square"></a>
 </p>
 
 ---
@@ -45,4 +45,4 @@ const MyBinding: BindingInterface = {
 
 The error classes (`PortNotFoundError`, `PermissionDeniedError`, `DisconnectedError`, `CancelledError`, `TimeoutError`, …) are also re-exported from the meta `serialpilot` package.
 
-See the [SerialPilot package matrix](https://github.com/riteshrana/serialpilot#readme) for how the layers fit together.
+See the [SerialPilot package matrix](https://github.com/serialpilot/serialpilot#readme) for how the layers fit together.

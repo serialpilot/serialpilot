@@ -4,10 +4,10 @@
   "description": "SerialPilot hardware bindings for Node.js written in C++",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
-  "homepage": "https://github.com/riteshrana/serialpilot/tree/main/packages/bindings-cpp",
+  "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/bindings-cpp",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riteshrana/serialpilot.git",
+    "url": "git+https://github.com/serialpilot/serialpilot.git",
     "directory": "packages/bindings-cpp"
   },
   "bugs": {
