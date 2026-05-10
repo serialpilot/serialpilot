@@ -1,3 +1,6 @@
+// `PortBuilder::exclusive` is unix-only, so this bench can't compile on Windows.
+#![cfg(unix)]
+
 use criterion::{criterion_group, criterion_main, Criterion};
 
 fn bench_builder_construction(c: &mut Criterion) {

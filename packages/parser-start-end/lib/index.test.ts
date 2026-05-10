@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import sinon from 'sinon'
 import { StartEndParser } from './'
 import { assert } from '../../../test/assert'

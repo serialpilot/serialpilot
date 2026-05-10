@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Poller } from './poller'
 import { assert } from '../test/assert'
 

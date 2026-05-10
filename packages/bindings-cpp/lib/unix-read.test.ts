@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BindingsError } from '.'
 import { assert, shouldReject } from '../test/assert'
 import { LinuxPortBinding } from './linux'

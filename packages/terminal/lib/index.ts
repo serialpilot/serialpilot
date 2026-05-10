@@ -48,7 +48,7 @@ const askForPort = async () => {
   }
 
   // Error in Enquirer types
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const answer = await new (Enquirer as any).Select({
     name: 'serial-port-selection',
     message: 'Select a serial port to open',
@@ -62,7 +62,6 @@ const askForPort = async () => {
 }
 
 const askForBaudRate = async () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const baud = await new (Enquirer as any).NumberPrompt({
     name: 'baudRate-selection',
     message: 'Enter a baud rate',

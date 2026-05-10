@@ -7,7 +7,7 @@ import stylistic from '@stylistic/eslint-plugin'
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ['**/dist/', '**/*.js'],
+    ignores: ['**/dist/', '**/*.js', 'website-next/'],
   },
   { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,

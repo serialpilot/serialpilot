@@ -267,9 +267,8 @@ export class SerialPilotStream<T extends BindingInterface = BindingInterface> ex
    * @returns {boolean} `false` if the stream wishes for the calling code to wait for the `'drain'` event to be emitted before continuing to write additional data; otherwise `true`.
    */
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   write(chunk: any, encoding?: BufferEncoding, cb?: (error: Error | null | undefined) => void): boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   write(chunk: any, cb?: (error: Error | null | undefined) => void): boolean
   write(
     data: string | Buffer | number[],

@@ -1,78 +1,78 @@
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks'
 import {
   type DemoLine,
   type DemoStream,
   isWebSerialSupported,
   openMockPort,
   openRealPort,
-} from '~/lib/webserial';
+} from '~/lib/webserial'
 
-type Status = 'idle' | 'connecting' | 'open' | 'closed' | 'error';
+type Status = 'idle' | 'connecting' | 'open' | 'closed' | 'error'
 
 export default function WebSerialDemo() {
-  const [supported, setSupported] = useState<boolean | null>(null);
-  const [status, setStatus] = useState<Status>('idle');
-  const [error, setError] = useState<string | null>(null);
-  const [baud, setBaud] = useState(115200);
-  const [lines, setLines] = useState<DemoLine[]>([]);
-  const [usingMock, setUsingMock] = useState(false);
-  const [portLabel, setPortLabel] = useState('');
-  const streamRef = useRef<DemoStream | null>(null);
-  const consoleRef = useRef<HTMLDivElement>(null);
+  const [supported, setSupported] = useState<boolean | null>(null)
+  const [status, setStatus] = useState<Status>('idle')
+  const [error, setError] = useState<string | null>(null)
+  const [baud, setBaud] = useState(115200)
+  const [lines, setLines] = useState<DemoLine[]>([])
+  const [usingMock, setUsingMock] = useState(false)
+  const [portLabel, setPortLabel] = useState('')
+  const streamRef = useRef<DemoStream | null>(null)
+  const consoleRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setSupported(isWebSerialSupported());
-  }, []);
+    setSupported(isWebSerialSupported())
+  }, [])
 
   useEffect(() => {
-    consoleRef.current?.scrollTo({ top: consoleRef.current.scrollHeight });
-  }, [lines]);
+    consoleRef.current?.scrollTo({ top: consoleRef.current.scrollHeight })
+  }, [lines])
 
   async function pump(stream: DemoStream) {
-    streamRef.current = stream;
-    setUsingMock(stream.mock);
-    setPortLabel(stream.portLabel);
-    setStatus('open');
+    streamRef.current = stream
+    setUsingMock(stream.mock)
+    setPortLabel(stream.portLabel)
+    setStatus('open')
     try {
       for await (const line of stream.lines()) {
-        setLines((prev) => {
-          const next = [...prev, line];
-          return next.length > 200 ? next.slice(-200) : next;
-        });
+        setLines(prev => {
+          const next = [...prev, line]
+          return next.length > 200 ? next.slice(-200) : next
+        })
       }
     } catch (e: any) {
-      setError(e?.message ?? 'Stream error');
-      setStatus('error');
+      setError(e?.message ?? 'Stream error')
+      setStatus('error')
     }
   }
 
   async function connectReal() {
-    setError(null);
-    setStatus('connecting');
+    setError(null)
+    setStatus('connecting')
     try {
-      const stream = await openRealPort(baud);
-      await pump(stream);
+      const stream = await openRealPort(baud)
+      await pump(stream)
     } catch (e: any) {
-      setError(e?.message ?? 'Connection failed');
-      setStatus('error');
+      setError(e?.message ?? 'Connection failed')
+      setStatus('error')
     }
   }
 
   function tryMock() {
-    setError(null);
-    setLines([]);
-    const stream = openMockPort();
-    pump(stream);
+    setError(null)
+    setLines([])
+    const stream = openMockPort()
+    pump(stream)
   }
 
   async function disconnect() {
-    await streamRef.current?.close();
-    streamRef.current = null;
-    setStatus('closed');
+    await streamRef.current?.close()
+    streamRef.current = null
+    setStatus('closed')
   }
 
   function clearConsole() {
-    setLines([]);
+    setLines([])
   }
 
   return (
@@ -98,7 +98,7 @@ export default function WebSerialDemo() {
               onChange={(e: any) => setBaud(parseInt(e.currentTarget.value, 10))}
               disabled={status === 'open' || status === 'connecting'}
             >
-              {[9600, 19200, 38400, 57600, 115200, 230400, 460800].map((b) => (
+              {[9600, 19200, 38400, 57600, 115200, 230400, 460800].map(b => (
                 <option value={b}>{b}</option>
               ))}
             </select>
@@ -125,7 +125,9 @@ export default function WebSerialDemo() {
 
       {!supported && (
         <p class="ws-demo__notice">
-          <strong>Heads up:</strong> WebSerial isn't supported in this browser
+          <strong>Heads up:</strong>
+          {' '}
+          WebSerial isn't supported in this browser
           (Safari and Firefox don't ship it yet). The mock stream below works
           everywhere and uses the same parser pipeline you'd run against a real
           port — no hardware required.
@@ -135,20 +137,26 @@ export default function WebSerialDemo() {
       {error && <p class="ws-demo__notice ws-demo__notice--error">{error}</p>}
 
       <div class="ws-demo__console" ref={consoleRef as any} aria-live="polite" aria-label="Serial console output">
-        {lines.length === 0 ? (
-          <p class="ws-demo__empty">— waiting for bytes —</p>
-        ) : (
-          lines.map((l) => (
-            <div class={`ws-line ws-line--${l.dir}`}>
-              <span class="ws-line__ts">{l.ts.toFixed(0).padStart(5, ' ')}ms</span>
-              <span class="ws-line__dir">{l.dir.toUpperCase()}</span>
-              <span class="ws-line__text">{l.text}</span>
-            </div>
-          ))
-        )}
+        {lines.length === 0
+          ? (
+              <p class="ws-demo__empty">— waiting for bytes —</p>
+            )
+          : (
+              lines.map(l => (
+                <div class={`ws-line ws-line--${l.dir}`}>
+                  <span class="ws-line__ts">
+                    {l.ts.toFixed(0).padStart(5, ' ')}
+                    ms
+                  </span>
+                  <span class="ws-line__dir">{l.dir.toUpperCase()}</span>
+                  <span class="ws-line__text">{l.text}</span>
+                </div>
+              ))
+            )}
       </div>
 
-      <style>{`
+      <style>
+        {`
         .ws-demo {
           border: 1px solid var(--rule);
           border-radius: var(--radius-2);
@@ -248,7 +256,8 @@ export default function WebSerialDemo() {
         .ws-line--tx .ws-line__dir { color: var(--trace-tx); }
         .ws-line--rx .ws-line__dir { color: var(--trace-rx); }
         .ws-line__text { color: oklch(0.96 0.015 80 / 0.92); white-space: pre-wrap; word-break: break-all; }
-      `}</style>
+      `}
+      </style>
     </div>
-  );
+  )
 }

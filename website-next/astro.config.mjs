@@ -1,7 +1,7 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import preact from '@astrojs/preact';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config'
+import mdx from '@astrojs/mdx'
+import preact from '@astrojs/preact'
+import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
   site: 'https://riteshrana.github.io',
@@ -19,4 +19,4 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-});
+})

@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { assert } = require('chai')
 
 export const shouldReject = async (promise: Promise<unknown>, errType = Error, message = 'Should have rejected') => {

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { assert, shouldReject } from '../test/assert'
 import { makeTestFeature } from '../test/makeTestFeature'
 import { BindingInterface, OpenOptions, PortInfo, SetOptions } from '@serialpilot/bindings-interface'
