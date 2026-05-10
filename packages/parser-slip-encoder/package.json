@@ -1,6 +1,7 @@
 {
   "name": "@serialpilot/parser-slip-encoder",
   "version": "1.0.0",
+  "description": "An RFC 1055 SLIP framing encoder/decoder for serial links.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
   "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/parser-slip-encoder",

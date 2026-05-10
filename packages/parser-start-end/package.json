@@ -1,6 +1,7 @@
 {
   "name": "@serialpilot/parser-start-end",
   "version": "1.0.0",
+  "description": "A transform stream that frames data on configurable start/end byte sequences.",
   "license": "MIT",
   "author": "Ritesh Rana <contact@riteshrana.engineer>",
   "homepage": "https://github.com/serialpilot/serialpilot/tree/main/packages/parser-start-end",
